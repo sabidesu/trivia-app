@@ -37,9 +37,13 @@ const Question = props => {
 		setIsShuffled(true);
 	}
 
+	let response = "";
+	if (isAnswered && isCorrect) response = " Correct!";
+	else if (isAnswered) response = " Incorrect!";
+
 	return (
 		<div>
-			<p>{props.question}</p>
+			<p>{props.question + response}</p>
 			<div>{buttons}</div>
 		</div>
 	);
