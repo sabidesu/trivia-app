@@ -14,7 +14,7 @@ function Trivia() {
 				qList = qJSON.results.map((qInfo) => makeQuestion(qInfo));
 				setHaveJSON(true);
 			})
-			.catch(error => console.error("error fetching questions: ", error))
+			.catch(error => console.error("error fetching questions: ", error));
 	}, []);
 
 	return (
