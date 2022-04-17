@@ -1,25 +1,29 @@
 import {useState, useEffect} from "react";
 import Question from "./Question.js";
 
-function Trivia() {
+const Trivia = props => {
 	let trivia_api = 'https://opentdb.com/api.php?amount=10';
-	const [haveJSON, setHaveJSON] = useState(false);
-	let qList = [];
+	const [qJSON, setQJSON] = useState([]);
+	const [haveQJSON, setHaveQJSON] = useState(false);
 
 	useEffect(() => {
 		fetch(trivia_api)
 			.then(response => response.json())
 			.then(qJSON => {
 				console.log(qJSON);
-				qList = qJSON.results.map((qInfo) => makeQuestion(qInfo));
-				setHaveJSON(true);
+				setQJSON(qJSON);
+				setHaveQJSON(true);
 			})
 			.catch(error => console.error("error fetching questions: ", error));
 	}, []);
 
+	console.log(qJSON);
+
 	return (
 		<div>
-			{qList}
+			{
+				haveQJSON ? qJSON.results.map((qInfo) => makeQuestion(qInfo)) : "loading..."
+			}
 		</div>
 	);
 }
@@ -31,7 +35,9 @@ function makeQuestion(info) {
 			correct={info.correct_answer} 
 			wrong={info.incorrect_answers}
 			isAnswered={false}
-			isCorrect={false} />
+			isCorrect={false} 
+			key={info.question}
+			/>
 	);
 }
 
