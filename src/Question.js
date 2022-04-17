@@ -13,7 +13,10 @@ class Question extends React.Component {
 			buttons.push(<Button correct={false} text={answer} clicked={false}/>));
 
 		return (
-			<div>{this.props.question}</div>
+			<div>
+				<p>{this.props.question}</p>
+				<div>{buttons}</div>
+			</div>
 		);
 	}
 }

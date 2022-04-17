@@ -25,8 +25,6 @@ function Trivia() {
 }
 
 function makeQuestion(info) {
-	console.log(info);
-
 	return (
 		<Question 
 			question={info.question} 
