@@ -1,11 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import Button from "./Button.js";
 
 const Question = props => {
+	const [isAnswered, setIsAnswered] = useState(false);
+	const [isCorrect, setIsCorrect] = useState(false);
+
+	const answered = () => {
+		setIsAnswered(true);
+	}
+
 	let buttons = [];
-	buttons.push(<Button correct={true} text={props.correct} clicked={false} key={props.correct} />);
+	buttons.push(<Button 
+		correct={true} 
+		text={props.correct} 
+		key={props.correct} 
+		onClick={answered} 
+		disabled={isAnswered} />);
 	props.wrong.forEach(answer => 
-		buttons.push(<Button correct={false} text={answer} clicked={false} key={answer}/>));
+		buttons.push(<Button 
+			correct={false} 
+			text={answer} 
+			key={answer}
+			onClick={answered} 
+			disabled={isAnswered}
+			/>));
 
 	buttons.sort((a, b) => 0.5 - Math.random()); // rough shuffle on component init
 
@@ -16,5 +34,6 @@ const Question = props => {
 		</div>
 	);
 }
+
 
 export default Question;

@@ -17,8 +17,6 @@ const Trivia = props => {
 			.catch(error => console.error("error fetching questions: ", error));
 	}, []);
 
-	console.log(qJSON);
-
 	return (
 		<div>
 			{
@@ -34,8 +32,6 @@ function makeQuestion(info) {
 			question={info.question} 
 			correct={info.correct_answer} 
 			wrong={info.incorrect_answers}
-			isAnswered={false}
-			isCorrect={false} 
 			key={info.question}
 			/>
 	);
