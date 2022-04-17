@@ -4,9 +4,15 @@ import Button from "./Button.js";
 const Question = props => {
 	const [isAnswered, setIsAnswered] = useState(false);
 	const [isCorrect, setIsCorrect] = useState(false);
+	const [isShuffled, setIsShuffled] = useState(false);
 
-	const answered = () => {
+	const incorrect = () => {
 		setIsAnswered(true);
+	}
+
+	const correct = () => {
+		setIsAnswered(true);
+		setIsCorrect(true);
 	}
 
 	let buttons = [];
@@ -14,18 +20,22 @@ const Question = props => {
 		correct={true} 
 		text={props.correct} 
 		key={props.correct} 
-		onClick={answered} 
+		onClick={correct} 
 		disabled={isAnswered} />);
 	props.wrong.forEach(answer => 
 		buttons.push(<Button 
 			correct={false} 
 			text={answer} 
 			key={answer}
-			onClick={answered} 
+			onClick={incorrect} 
 			disabled={isAnswered}
 			/>));
 
-	buttons.sort((a, b) => 0.5 - Math.random()); // rough shuffle on component init
+	// answer shuffle on component init
+	if (!isShuffled) {
+		buttons.sort((a, b) => 0.5 - Math.random()); 
+		setIsShuffled(true);
+	}
 
 	return (
 		<div>
