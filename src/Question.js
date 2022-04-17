@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Answer from "./Answer.js";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import Box from "@mui/material/Box"
 
 const Question = props => {
 	const [isAnswered, setIsAnswered] = useState(false);
@@ -39,16 +40,23 @@ const Question = props => {
 	}
 
 	let response = "";
-	if (isAnswered && isCorrect) response = " Correct!";
-	else if (isAnswered) response = " Incorrect!";
+	let paperColor = "primary.main";
+	if (isAnswered && isCorrect) {
+		response = " Correct!";
+		paperColor = "success.main";
+	}
+	else if (isAnswered) {
+		response = " Incorrect!";
+		paperColor = "error.main";
+	}
 
 	return (
-		<div>
+		<Box sx={{backgroundColor: paperColor}}>
 			<p>{props.question + response}</p>
 			<ButtonGroup variant="contained">
 				{buttons}
 			</ButtonGroup>
-		</div>
+		</Box>
 	);
 }
 

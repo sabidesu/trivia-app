@@ -18,11 +18,11 @@ const Trivia = props => {
 	}, []);
 
 	return (
-		<div>
+		<>
 			{
 				haveQJSON ? qJSON.results.map((qInfo) => makeQuestion(qInfo)) : "loading..."
 			}
-		</div>
+		</>
 	);
 }
 
