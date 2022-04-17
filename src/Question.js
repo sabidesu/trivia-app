@@ -7,8 +7,9 @@ class Question extends React.Component {
 	}
 }
 
-export function makeQuestion() {
-
+export function makeQuestion(info) {
+	console.log(info);
+	return info;
 }
 
-export default Question;
+export default makeQuestion;

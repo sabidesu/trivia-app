@@ -1,21 +1,25 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import makeQuestion from "./Question.js";
-import React from "react";
 
-class Trivia extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-	
-	render() {
-		const qList = this.props.questions.results.map((qInfo) => makeQuestion(qInfo));
+function Trivia() {
+	let trivia_api = 'https://opentdb.com/api.php?amount=10';
+	let qList = [];
 
-		return (
-			<>
-				{qList}
-			</>
-		)
-	}
+	useEffect(() => {
+		fetch(trivia_api)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				qList = data.results.map((qInfo) => makeQuestion(qInfo));
+			})
+			.catch(error => console.error("error fetching questions: ", error))
+	}, [])
+
+	return (
+		<>
+			{qList}
+		</>
+	)
 }
 
 export default Trivia;
