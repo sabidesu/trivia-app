@@ -1,11 +1,21 @@
 import {useState} from "react";
+import makeQuestion from "./Question.js";
+import React from "react";
 
-function Trivia(props) {
-	const qList = props.questions.results.map((qInfo) => makeQuestion(qInfo));
+class Trivia extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	
+	render() {
+		const qList = this.props.questions.results.map((qInfo) => makeQuestion(qInfo));
 
-	return (
-		<>
-			{qList}
-		</>
-	)
+		return (
+			<>
+				{qList}
+			</>
+		)
+	}
 }
+
+export default Trivia;
