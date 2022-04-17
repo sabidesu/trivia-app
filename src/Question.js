@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Button from "./Button.js";
+import Answer from "./Answer.js";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 const Question = props => {
 	const [isAnswered, setIsAnswered] = useState(false);
@@ -16,14 +17,14 @@ const Question = props => {
 	}
 
 	let buttons = [];
-	buttons.push(<Button 
+	buttons.push(<Answer 
 		correct={true} 
 		text={props.correct} 
 		key={props.correct} 
 		onClick={correct} 
 		disabled={isAnswered} />);
 	props.wrong.forEach(answer => 
-		buttons.push(<Button 
+		buttons.push(<Answer 
 			correct={false} 
 			text={answer} 
 			key={answer}
@@ -44,7 +45,9 @@ const Question = props => {
 	return (
 		<div>
 			<p>{props.question + response}</p>
-			<div>{buttons}</div>
+			<ButtonGroup variant="contained">
+				{buttons}
+			</ButtonGroup>
 		</div>
 	);
 }
